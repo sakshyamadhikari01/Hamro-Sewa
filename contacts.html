@@ -1,8 +1,6 @@
-{% extends 'base.html' %}
-{% block title %}{{ lang['contacts_title'] }} - Hamro Sewa{% endblock %}
-{% block content %}
-<div class="container" style="max-width: 520px; margin: 40px auto; background: #fff7e6; border-radius: 18px; box-shadow: 0 4px 32px rgba(212,163,115,0.10); padding: 36px 32px;"></div>
- <h1 style="font-family: 'Poppins', Arial, sans-serif; font-size: 2em; margin-bottom: 24px; color: #3d2c1a;">{{ lang['contacts_title'] }}</h1>
+
+<div class="container" style="max-width: 520px; margin: 40px auto; background: #fff7e6; border-radius: 18px; box-shadow: 0 4px 32px rgba(212,163,115,0.10); padding: 36px 32px;">
+    <h1 style="font-family: 'Poppins', Arial, sans-serif; font-size: 2em; margin-bottom: 24px; color: #3d2c1a;">{{ lang['contacts_title'] }}</h1>
     <form method="POST" action="/contacts" class="auth-form">
         <label for="name">Your Name</label>
         <input type="text" id="name" name="name" placeholder="Enter your name" required>
@@ -19,4 +17,4 @@
         <a href="mailto:hamrosewabusiness@gmail.com" style="color: #8f5cff; text-decoration: underline;">hamrosewabusiness@gmail.com</a>
     </div>
 </div>
-{% endblock %}
+

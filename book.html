@@ -1,6 +1,4 @@
-{% extends 'base.html' %}
-{% block title %}Book {{ prof.name }} - Hamro Sewa{% endblock %}
-{% block content %}
+
 <div class="container" style="max-width: 520px; margin: 40px auto;">
     <h1>Book {{ prof.name }}</h1>
     <form method="POST" action="/book/{{ job }}/{{ prof.name }}" class="auth-form">
