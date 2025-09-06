@@ -1,8 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">    
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}My Website{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>{% block title %}Hamro Sewa{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/animated-footer.css">
+</head>
+<body>
+    <header class="main-header fixed-navbar">
+        <div class="navbar-content" style="display:flex;align-items:center;justify-content:space-between;padding:0 32px;">
+            <div class="logo" style="font-size:2em; font-weight:600; color:#c89b6c;white-space:nowrap;">Hamro Sewa</div>
+            <nav style="display:flex;align-items:center;gap:32px;">
+                <a href="/home" class="nav-link">Home</a>
+                <a href="/contacts" class="nav-link">{{ lang['contacts'] }}</a>
+                <a href="/team" class="nav-link">{{ lang['team'] }}</a>
+                {% if session.get('role') == 'professional' and session.get('phone') and session.get('job') and request.endpoint == 'professional_dashboard' %}
+                    <a href="/professional_dashboard/{{ session.get('job') }}" class="nav-link">Dashboard</a>
+                {% endif %}
+                <a href="/login" class="nav-link">{{ lang['login'] }}</a>
+                <a href="/register" class="nav-link">{{ lang['register'] }}</a>
+            </nav>
+            <form method="post" action="/switch_language" style="margin-left:18px;">
+                <button type="submit" name="lang" value="{{ 'ne' if session.get('lang', 'en') == 'en' else 'en' }}" style="background:#d4a373;color:#fff;border:none;border-radius:6px;padding:6px 16px;font-size:1em;cursor:pointer;">{{ lang['nepali'] if session.get('lang', 'en') == 'en' else lang['english'] }}</button>
+            </form>
+        </div>
+    </header>
+    <main>
+        <div class="main-content">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+    <footer class="main-footer casa-footer">
+    <footer class="footer-animated">
+        <div class="footer-waves">
+            <svg viewBox="0 0 1200 80" preserveAspectRatio="none" style="width:100%;height:80px;display:block;">
+                <path d="M0,40 C300,80 900,0 1200,40 L1200,80 L0,80 Z" fill="#d4a373" opacity="0.18"></path>
+                <path d="M0,60 C400,100 800,20 1200,60 L1200,80 L0,80 Z" fill="#a98467" opacity="0.12"></path>
+            </svg>
+        </div>
+        <div class="footer-content">
+            <div style="font-size:2em;font-weight:700;letter-spacing:1px;margin-bottom:12px;">Hamro Sewa</div>
+            <div style="max-width:700px;line-height:1.6;font-size:1.08em;text-align:center;">Quality home services, on demand.<br><span style="font-weight:600;">Made by Arobyte Technologies</span></div>
+            <div class="footer-social">
+                <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fa fa-instagram"></i></a>
+                <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
+            </div>
+            <div class="footer-copyright">© 2025 All rights RESERVED</div>
+            <div class="footer-backtotop" onclick="window.scrollTo({top:0,behavior:'smooth'});">BACK TO TOP</div>
+        </div>
+    </footer>
+</body>
 </html>
