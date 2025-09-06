@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block title %}{{ job }}s - Hamro Sewa{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>{{ job }}s</h1>
+    <a href="/" class="back-link">&#8592; Back</a>
+    <form class="search-form">
+        <div style="display:flex;align-items:center;gap:0;justify-content:center;margin-bottom:18px;">
+            <input type="text" placeholder="Search by name or experience..." name="search" style="padding:12px 18px;border-radius:24px 0 0 24px;border:1px solid #e9dcc7;font-size:1.08em;box-shadow:0 2px 8px rgba(212,163,115,0.10);outline:none;width:260px;transition:box-shadow 0.2s;" onfocus="this.style.boxShadow='0 4px 16px rgba(212,163,115,0.18)';" onblur="this.style.boxShadow='0 2px 8px rgba(212,163,115,0.10)';">
+            <button type="submit" style="padding:12px 28px;border-radius:0 24px 24px 0;border:none;background:#d4a373;color:#fff;font-size:1.08em;font-weight:600;cursor:pointer;box-shadow:0 2px 8px rgba(212,163,115,0.10);transition:background 0.2s;">Search</button>
+        </div>
+    </form>
+    <div class="professional-list">
+        {% for prof in professionals %}
+        <div class="professional-card">
+            <div class="profile-img-wrapper">
+                <img src="{{ prof.image }}" alt="{{ prof.name }}" class="profile-img" />
+                <span class="job-badge">{{ job }}</span>
+            </div>
+            <div class="details">
+                <h2>{{ prof.name }}</h2>
+                <p class="employee-location" style="margin-bottom:8px;">
+                    {% set chowk = '' %}
+                    {% if job == 'Electrician' %}
+                        {% if loop.index == 1 %} {% set chowk = 'Pulchowk' %}
+                        {% elif loop.index == 2 %} {% set chowk = 'Hakimchowk' %}
+                        {% else %} {% set chowk = 'Lionschowk' %}
+                        {% endif %}
+                    {% elif job == 'Plumber' %}
+                        {% if loop.index == 1 %} {% set chowk = 'Chaubiskothi' %}
+                        {% elif loop.index == 2 %} {% set chowk = 'Pulchowk' %}
+                        {% else %} {% set chowk = 'Hakimchowk' %}
+                        {% endif %}
+                    {% elif job == 'Carpenter' %}
+                        {% if loop.index == 1 %} {% set chowk = 'Lionschowk' %}
+                        {% elif loop.index == 2 %} {% set chowk = 'Chaubiskothi' %}
+                        {% else %} {% set chowk = 'Pulchowk' %}
+                        {% endif %}
+                    {% else %} {% set chowk = 'Bharatpur' %}
+                    {% endif %}
+                    <span style="background:#d4a373;color:#fff;padding:4px 14px;border-radius:12px;font-size:0.98em;font-weight:600;box-shadow:0 2px 8px rgba(212,163,115,0.10);display:inline-block;">
+                        {{ chowk }}
+                    </span>
+                    {% if role == 'professional' and prof.name == user_name %}
+                        <span style="background:#a98467;color:#fff;padding:4px 10px;border-radius:10px;font-size:0.92em;font-weight:500;margin-left:8px;">Your Location</span>
+                    {% endif %}
+                </p>
+                <p class="contact"><strong>Contact:</strong> {{ prof.contact }}</p>
+                <p class="rating">
+                    <strong>Rating:</strong>
+                    {% for i in range(1, 6) %}
+                        {% if i <= prof.rating|round(0, 'floor') %}
+                            <span style="color:#d4a373; font-size:1.2em;">&#9733;</span>
+                        {% else %}
+                            <span style="color:#e9dcc7; font-size:1.2em;">&#9733;</span>
+                        {% endif %}
+                    {% endfor %}
+                    <span style="color:#a98467; font-size:0.95em;">({{ prof.rating }})</span>
+                </p>
+                <p class="experience"><strong>Experience:</strong> {{ prof.experience }}</p>
+                <a href="/book/{{ job }}/{{ prof.name }}" class="book-btn">{{ lang['book_now'] }}</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
