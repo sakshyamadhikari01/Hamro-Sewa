@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}{{ lang['contacts_title'] }} - Hamro Sewa{% endblock %}
+{% block content %}
+<div class="container" style="max-width: 520px; margin: 40px auto; background: #fff7e6; border-radius: 18px; box-shadow: 0 4px 32px rgba(212,163,115,0.10); padding: 36px 32px;"></div>
+ <h1 style="font-family: 'Poppins', Arial, sans-serif; font-size: 2em; margin-bottom: 24px; color: #3d2c1a;">{{ lang['contacts_title'] }}</h1>
+    <form method="POST" action="/contacts" class="auth-form">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" name="subject" placeholder="What's this about?" required>
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="4" placeholder="Your message..." required></textarea>
+        <button type="submit" class="auth-btn" style="background: #8f5cff; margin-top: 18px;">Send Message</button>
+    </form>
+    <div style="margin-top: 32px; text-align: center; color: #a98467; font-size: 1.08em;">
+        <strong>Or email us directly:</strong><br>
+        <a href="mailto:hamrosewabusiness@gmail.com" style="color: #8f5cff; text-decoration: underline;">hamrosewabusiness@gmail.com</a>
+    </div>
+</div>
+{% endblock %}

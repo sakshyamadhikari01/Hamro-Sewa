@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Book {{ prof.name }} - Hamro Sewa{% endblock %}
+{% block content %}
+<div class="container" style="max-width: 520px; margin: 40px auto;">
+    <h1>Book {{ prof.name }}</h1>
+    <form method="POST" action="/book/{{ job }}/{{ prof.name }}" class="auth-form">
+        <label for="date">Choose Date</label>
+        <input type="date" id="date" name="date" required>
+        <label for="time">Choose Time</label>
+        <select id="time" name="time" required>
+            {% for slot in available_slots %}
+                <option value="{{ slot }}" {% if slot in busy_slots %}disabled{% endif %}>{{ slot }} {% if slot in busy_slots %}(Busy){% endif %}</option>
+            {% endfor %}
+        
+            </select>
+        <button type="submit" class="auth-btn">Confirm Booking</button>
+    </form>
+    <div style="margin-top: 32px;">
+        <h2>Chat with {{ prof.name }}</h2>
+        <div id="chat-box" style="background:#f5e9da; border-radius:10px; padding:16px; min-height:120px; margin-bottom:12px;">
+            {% for msg in chat_history %}
+                <div style="margin-bottom:8px;"><strong>{{ msg.sender }}:</strong> {{ msg.text }}</div>
+            {% endfor %}
+        </div>
+        <form method="POST" action="/chat/{{ job }}/{{ prof.name }}" style="display:flex; gap:8px;">
+            <input type="text" name="message" placeholder="Type your message..." style="flex:1; padding:8px; border-radius:6px; border:1px solid #e9dcc7;">
+            <button type="submit" class="auth-btn" style="padding:8px 18px;">Send</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
