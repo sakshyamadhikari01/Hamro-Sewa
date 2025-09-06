@@ -1,0 +1,55 @@
+
+<div class="container" style="text-align:center;">
+    <h1>Welcome, Professional!</h1>
+    <p class="subtitle">View customer requests and messages for your job: <span style="color:#d4a373;font-weight:600;">{{ job }}</span></p>
+    {% if not subscription.active %}
+    <div id="subscription-popup" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.35);z-index:999;display:flex;align-items:center;justify-content:center;">
+        <div style="background:#fff7e6;padding:32px 40px;border-radius:18px;box-shadow:0 4px 24px rgba(212,163,115,0.18);text-align:center;max-width:340px;">
+            <h2 style="color:#d32f2f;">Activate Your Account</h2>
+            <p style="margin-bottom:18px;">You need an active subscription to work.<br>Choose a plan:</p>
+            <form method="POST" action="/subscription">
+                <button type="submit" name="plan" value="week" class="auth-btn" style="margin-right:12px;">Rs 50 / Week</button>
+                <button type="submit" name="plan" value="month" class="auth-btn">Rs 300 / Month</button>
+            </form>
+            <p style="margin-top:18px;color:#a98467;font-size:1em;">Or use code <strong>990099</strong> for 1 month free.</p>
+            <a href="/subscription" style="display:block;margin-top:12px;color:#d4a373;font-weight:600;">More Options</a>
+        </div>
+    </div>
+    <script>
+     
+        document.body.style.overflow = 'hidden';
+    </script>
+    {% endif %}
+    <div style="margin-top:32px;">
+        <h2>Customer Requests</h2>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:18px;">
+            {% for req in requests %}
+            <div style="background:#fff7e6;border-radius:14px;box-shadow:0 2px 8px rgba(212,163,115,0.10);padding:18px 32px;min-width:260px;max-width:420px;text-align:left;">
+                <strong>{{ req.customer }}</strong> <span style="color:#a98467;">({{ req.service }})</span><br>
+                <span style="color:#d4a373;">{{ req.date }} at {{ req.time }}</span><br>
+                <span style="color:#7c6e57;">{{ req.message }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div style="margin-top:48px;">
+        <h2>Messages from Customers</h2>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
+            {% for msg in messages %}
+            <div style="background:#fff7e6;border-radius:10px;box-shadow:0 2px 8px rgba(212,163,115,0.10);padding:12px 24px;min-width:220px;max-width:380px;text-align:left;">
+                <strong>{{ msg.customer }}:</strong> <span style="color:#7c6e57;">{{ msg.text }}</span>
+                {% if replies[msg.customer] %}
+                    <div style="margin-top:8px;color:#d4a373;"><strong>Your Reply:</strong> {{ replies[msg.customer] }}</div>
+                {% else %}
+                    <form method="POST" style="margin-top:10px;display:flex;gap:8px;">
+                        <input type="hidden" name="customer" value="{{ msg.customer }}" />
+                        <input type="text" name="reply" placeholder="Type your reply..." style="flex:1;padding:6px 10px;border-radius:6px;border:1px solid #e9dcc7;">
+                        <button type="submit" class="auth-btn" style="padding:6px 18px;">Send</button>
+                    </form>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
