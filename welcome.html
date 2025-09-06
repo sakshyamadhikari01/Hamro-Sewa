@@ -1,0 +1,275 @@
+{% extends 'minimal_base.html' %}
+{% block title %}Welcome - Hamro Sewa{% endblock %}
+{% block content %}
+<style>
+.welcome-bg {
+    background: #fff7e6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.nepal-svg {
+    width: 420px;
+    height: 180px;
+    margin-bottom: 32px;
+}
+.nepal-outline {
+    stroke: #d4a373;
+    stroke-width: 4;
+    fill: none;
+    stroke-dasharray: 1200;
+    stroke-dashoffset: 1200;
+    animation: drawNepal 2.2s ease forwards;
+}
+@keyframes drawNepal {
+    to { stroke-dashoffset: 0; }
+}
+.welcome-text {
+    font-size: 2.2em;
+    color: #a98467;
+    font-family: 'Poppins', Arial, sans-serif;
+    margin-bottom: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+.hamrosewa-type {
+    font-size: 3.2em;
+    color: #d4a373;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-weight: 700;
+    letter-spacing: 2px;
+    min-height: 1em;
+    border-right: 2px solid #d4a373;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    animation: typing 1.6s steps(10, end) 2.2s forwards, blink-caret 0.7s step-end infinite 3.8s;
+}
+@keyframes typing {
+    from { width: 0; }
+    to { width: 10ch; }
+}
+@keyframes blink-caret {
+    0%, 100% { border-color: #d4a373; }
+    50% { border-color: transparent; }
+}
+.enter-btn {
+    margin-top: 48px;
+    background: #d4a373;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 16px 38px;
+    font-size: 1.2em;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(212,163,115,0.10);
+    transition: background 0.2s, transform 0.2s;
+}
+.enter-btn:hover {
+    background: #a98467;
+    transform: scale(1.07);
+}
+</style>
+<div class="welcome-bg">
+    <audio id="welcome-audio" src="/static/heroes_tonight.mp3" loop></audio>
+    <audio id="click-audio" src="/static/click.mp3" preload="auto" style="display:none"></audio>
+    <button id="mute-btn" style="position:fixed;top:32px;right:32px;z-index:999;background:rgba(30,30,30,0.45);border:none;border-radius:12px;width:120px;height:60px;box-shadow:0 2px 8px rgba(212,163,115,0.10);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.2s;">
+        <svg id="wave-svg" width="100" height="40" viewBox="0 0 100 40" style="display:block;">
+            <path id="wave1" d="M0,20 Q25,0 50,20 T100,20" stroke="#fff" stroke-width="2" fill="none" />
+            <path id="wave2" d="M0,25 Q25,40 50,20 T100,25" stroke="#fff" stroke-width="2" fill="none" style="opacity:0.7;" />
+        </svg>
+    </button>
+    <!-- Only one script block for music/mute logic -->
+        <div class="logo-anim-container">
+            <div style="position:relative; width:320px; height:320px;">
+                <svg id="hamro-logo" viewBox="0 0 480 480" width="320" height="320" style="display:block; position:absolute; top:0; left:0; z-index:1;">
+                    <!-- Electrician: plug icon -->
+                    <g id="icon-plug" style="opacity:0;">
+                        <rect x="220" y="60" width="40" height="20" rx="6" fill="#1A2540" />
+                        <rect x="230" y="80" width="6" height="18" fill="#C9A060" />
+                        <rect x="244" y="80" width="6" height="18" fill="#C9A060" />
+                    </g>
+                    <!-- Plumber: wrench icon -->
+                    <g id="icon-wrench" style="opacity:0;">
+                        <rect x="80" y="200" width="60" height="16" rx="8" fill="#C9A060" />
+                        <circle cx="80" cy="208" r="12" fill="#1A2540" />
+                    </g>
+                    <!-- Carpenter: hammer icon -->
+                    <g id="icon-hammer" style="opacity:0;">
+                        <rect x="340" y="200" width="60" height="16" rx="8" fill="#C9A060" />
+                        <rect x="370" y="180" width="16" height="40" fill="#1A2540" />
+                    </g>
+            /* Tool icon animations */
+            #icon-plug, #icon-wrench, #icon-hammer {
+                transition: opacity 0.6s, transform 0.6s;
+            }
+            .show-tool {
+                opacity: 1 !important;
+                transform: scale(1.2) rotate(-8deg);
+            }
+                <!-- Base shape (sketch effect) -->
+                <path id="logo-base" d="M240,40 L400,120 Q420,240 400,360 L240,440 L80,360 Q60,240 80,120 Z" fill="none" stroke="#C9A060" stroke-width="6" stroke-linecap="round"/>
+                <!-- Blue background (paint effect) -->
+                <polygon id="logo-bg" points="60,240 240,40 420,240 240,440" fill="#1A2540" opacity="0"/>
+                <!-- Gold border (paint effect) -->
+                <path id="logo-gold" d="M240,40 L400,120 Q420,240 400,360 L240,440 L80,360 Q60,240 80,120 Z" fill="#C9A060" opacity="0"/>
+                <!-- Tools (fade-in) -->
+                <g id="logo-tools" opacity="0">
+                    <path d="M180,120 L200,100 L220,120" stroke="#C9A060" stroke-width="5" fill="none"/>
+                    <rect x="210" y="90" width="20" height="30" fill="#C9A060"/>
+                    <path d="M260,120 L280,100 L300,120" stroke="#C9A060" stroke-width="5" fill="none"/>
+                    <!-- Add more tool shapes as needed -->
+                </g>
+                <!-- Text (fade-in) -->
+                <text id="logo-text" x="240" y="260" text-anchor="middle" font-size="48" font-family="Montserrat, sans-serif" fill="#fff" opacity="0">HAMRO SEWA</text>
+            </svg>
+                <img id="original-logo" src="/static/logo.png" alt="Hamro Sewa Logo" style="position:absolute; top:15px; left:15px; width:290px; height:290px; opacity:0; transition:opacity 1.2s; display:none; z-index:2; object-fit:contain; clip-path:polygon(50% 0%, 92% 18%, 100% 50%, 92% 82%, 50% 100%, 8% 82%, 0% 50%, 8% 18%); background:#fff7e6;" />
+            </div>
+        </div>
+        <style>
+            .logo-anim-container { display: flex; justify-content: center; align-items: center; margin-top: 40px; }
+            #hamro-logo { display: block; }
+            /* Hammering effect for base */
+            #logo-base {
+                transform-origin: 50% 50%;
+                animation: hammerBase 1.2s steps(6, end) forwards;
+            }
+            @keyframes hammerBase {
+                0% { transform: scale(0.7) rotate(-8deg); opacity: 0.2; }
+                10% { transform: scale(1.05) rotate(6deg); opacity: 0.7; }
+                20% { transform: scale(0.95) rotate(-4deg); opacity: 1; }
+                30% { transform: scale(1.08) rotate(8deg); }
+                40% { transform: scale(0.92) rotate(-6deg); }
+                50% { transform: scale(1.04) rotate(4deg); }
+                60% { transform: scale(1) rotate(0deg); opacity: 1; }
+                100% { transform: scale(1) rotate(0deg); opacity: 1; }
+            }
+            /* Paint effect for blue and gold */
+            #logo-bg {
+                animation: paintBg 1.2s 2s ease-out forwards;
+            }
+            #logo-gold {
+                animation: paintGold 1.2s 2.6s ease-out forwards;
+            }
+            @keyframes paintBg {
+                to { opacity: 1; }
+            }
+            @keyframes paintGold {
+                to { opacity: 1; }
+            }
+            /* Fade-in for tools and text (triggered by JS) */
+            #logo-tools, #logo-text {
+                opacity: 0;
+                transition: opacity 1s ease-out;
+            }
+        </style>
+    <div class="welcome-text">Welcome to</div>
+    <div class="hamrosewa-type">HamroSewa</div>
+    <form method="get" action="/home">
+            <button class="enter-btn" id="enter-btn">{{ lang['enter_website'] }}</button>
+            <!-- Mute/Unmute and wave animation logic -->
+            <script>
+                // Declare variables only once
+                var audio = document.getElementById('welcome-audio');
+                var muteBtn = document.getElementById('mute-btn');
+                var wave1 = document.getElementById('wave1');
+                var wave2 = document.getElementById('wave2');
+                var clickAudio = document.getElementById('click-audio');
+                var anim = null;
+                // Set music volume to 20%
+                audio.volume = 0.2;
+                // Always start muted and paused
+                audio.muted = true;
+                audio.pause();
+                function animateWaves(muted) {
+                    if (anim) cancelAnimationFrame(anim);
+                    var t = 0;
+                    function draw() {
+                        t += 0.08;
+                        if (!muted) {
+                            wave1.setAttribute('d', `M0,20 Q25,${10+8*Math.sin(t)} 50,20 T100,20`);
+                            wave2.setAttribute('d', `M0,25 Q25,${30+8*Math.cos(t)} 50,20 T100,25`);
+                        } else {
+                            wave1.setAttribute('d', 'M0,20 Q25,20 50,20 T100,20');
+                            wave2.setAttribute('d', 'M0,25 Q25,25 50,20 T100,25');
+                        }
+                        anim = requestAnimationFrame(draw);
+                    }
+                    draw();
+                }
+                animateWaves(true); // Start with waves muted
+                muteBtn.onclick = function() {
+                    if (audio.muted) {
+                        audio.muted = false;
+                        audio.play();
+                        animateWaves(false);
+                    } else {
+                        audio.muted = true;
+                        audio.pause();
+                        animateWaves(true);
+                    }
+                    // Play click sound
+                    clickAudio.currentTime = 0;
+                    clickAudio.play();
+                };
+                // Play click sound for all button clicks
+                document.querySelectorAll('button').forEach(function(btn) {
+                    btn.addEventListener('click', function(e) {
+                        clickAudio.currentTime = 0;
+                        clickAudio.play();
+                    });
+                });
+                document.getElementById('enter-btn').onclick = function() {
+                    window.location.href = '/home';
+                };
+            </script>
+    </form>
+</div>
+<script>
+// Optionally, redirect after animation
+// Typing effect synchronization for logo finish
+document.addEventListener('DOMContentLoaded', function() {
+    var typeTarget = document.querySelector('.hamrosewa-type');
+    var fullText = 'HamroSewa';
+    var i = 0;
+    typeTarget.textContent = '';
+    function type() {
+        if (i < fullText.length) {
+            typeTarget.textContent += fullText[i];
+            i++;
+            setTimeout(type, 120);
+        } else {
+            // When typing is complete, fade in logo tools and text
+            document.getElementById('logo-tools').style.opacity = 1;
+            document.getElementById('logo-text').style.opacity = 1;
+            document.querySelector('.enter-btn').focus();
+            // Wait for sketching and painting effect to finish, then swap SVG for original logo
+            // Animate tool icons in sequence during hammering
+            setTimeout(function() {
+                document.getElementById('icon-plug').classList.add('show-tool');
+            }, 400);
+            setTimeout(function() {
+                document.getElementById('icon-wrench').classList.add('show-tool');
+            }, 700);
+            setTimeout(function() {
+                document.getElementById('icon-hammer').classList.add('show-tool');
+            }, 1000);
+            // Fade in the logo image after hammering and tool effects
+            setTimeout(function() {
+                var img = document.getElementById('original-logo');
+                img.style.display = 'block';
+                setTimeout(function() {
+                    img.style.opacity = 1;
+                }, 100);
+            }, 1600);
+        }
+    }
+    type();
+});
+</script>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}{{ lang['login_title'] }} - Hamro Sewa{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>{{ lang['login_title'] }}</h1>
+    <form method="POST" action="/login" class="auth-form">
+    <label for="role">{{ lang['register'] }}:</label>
+        <select id="role" name="role" required>
+            <option value="customer">Customer</option>
+            <option value="professional">Professional</option>
+        </select>
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required placeholder="9800000000">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+        <div id="job-select" style="display:none;">
+            <label for="job">Select Your Job</label>
+            <select id="job" name="job">
+                <option value="electrician">Electrician</option>
+                <option value="plumber">Plumber</option>
+                <option value="carpenter">Carpenter</option>
+            </select>
+        </div>
+    <button type="submit" class="auth-btn">{{ lang['login'] }}</button>
+    <p class="auth-link">{{ lang['register'] }}? <a href="/register">{{ lang['register'] }}</a></p>
+        <script>
+        document.getElementById('role').addEventListener('change', function() {
+            var jobSelect = document.getElementById('job-select');
+            if (this.value === 'professional') {
+                jobSelect.style.display = 'block';
+            } else {
+                jobSelect.style.display = 'none';
+            }
+        });
+        </script>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% block title %}Meet Our Team - Hamro Sewa{% endblock %}
+{% block content %}
+<style>
+.team-bg {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #fff7e6 60%, #d4a373 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 60px;
+    position: relative;
+}
+.team-header {
+    font-size: 3em;
+    font-family: 'Montserrat', 'Poppins', Arial, sans-serif;
+    font-weight: 800;
+    color: #a98467;
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+    text-shadow: 0 4px 24px rgba(212,163,115,0.15);
+    position: relative;
+    z-index: 2;
+}
+.team-sub {
+    font-size: 1.4em;
+    color: #d4a373;
+    margin-bottom: 48px;
+    font-weight: 500;
+    font-family: 'Poppins', Arial, sans-serif;
+    text-align: center;
+}
+.team-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 48px;
+    z-index: 2;
+}
+.team-card {
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(212,163,115,0.18);
+    width: 320px;
+    padding: 32px 24px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+}
+.team-card:hover {
+    transform: translateY(-12px) scale(1.04);
+    box-shadow: 0 16px 48px rgba(212,163,115,0.28);
+}
+.team-photo {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #d4a373 60%, #fff7e6 100%);
+    box-shadow: 0 4px 16px rgba(212,163,115,0.18);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.8em;
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border: 4px solid #a98467;
+    animation: popPhoto 1.2s cubic-bezier(.68,-0.55,.27,1.55) forwards;
+}
+@keyframes popPhoto {
+    0% { transform: scale(0.6); opacity: 0; }
+    80% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+}
+.team-name {
+    font-size: 1.6em;
+    font-weight: 700;
+    color: #a98467;
+    margin-bottom: 6px;
+    font-family: 'Montserrat', 'Poppins', Arial, sans-serif;
+    text-align: center;
+}
+.team-role {
+    font-size: 1.1em;
+    color: #d4a373;
+    font-weight: 600;
+    margin-bottom: 18px;
+    text-align: center;
+    font-family: 'Poppins', Arial, sans-serif;
+}
+.team-desc {
+    font-size: 1em;
+    color: #7c6e57;
+    text-align: center;
+    margin-bottom: 0;
+    font-family: 'Poppins', Arial, sans-serif;
+}
+.team-bg::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url('/static/team-bg.svg') center/cover no-repeat;
+    opacity: 0.08;
+    z-index: 1;
+}
+</style>
+<div class="team-bg">
+    <div class="team-header">Hamro Sewa</div>
+    <div class="team-sub">The passionate minds behind Hamro Sewa</div>
+    <div class="team-cards">
+        <div class="team-card">
+            <img src="/static/Ankit Gaire.jpg" alt="Ankit Gaire" class="profile-img" />
+            <div class="team-name">Ankit Gaire</div>
+            <div class="team-role">Coordinator</div>
+            <!-- Location removed -->
+            <div class="team-desc">Visionary leader and project coordinator, ensuring seamless teamwork and success.</div>
+        </div>
+        <div class="team-card">
+            <img src="/static/Sakshyam Adhikari.jpg" alt="Sakshyam Adhikari" class="profile-img" />
+            <div class="team-name">Sakshyam Adhikari</div>
+            <div class="team-role">UI & Frontend</div>
+            <!-- Location removed -->
+            <div class="team-desc">Crafts beautiful, intuitive user experiences and brings the Hamro Sewa interface to life.</div>
+        </div>
+        <div class="team-card">
+            <img src="/static/Dikshit sapkota.jpg" alt="Dikshit Sapkota" class="profile-img" />
+            <div class="team-name">Dikshit Sapkota</div>
+            <div class="team-role">Backend</div>
+            <!-- Location removed -->
+            <div class="team-desc">Architects robust backend systems, powering the engine behind Hamro Sewa.</div>
+        </div>
+        <div class="team-card">
+            <img src="/static/Subash Adhikari.jpg" alt="Subash Adhikari" class="profile-img" />
+            <div class="team-name">Subash Adhikari</div>
+            <div class="team-role">DB Manager</div>
+            <!-- Location removed -->
+            <div class="team-desc">Manages data with precision, ensuring reliability and security for all users.</div>
+        </div>
+    </div>
+</div>
+{% endblock %}

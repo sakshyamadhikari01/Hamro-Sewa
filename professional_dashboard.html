@@ -1,4 +1,6 @@
-
+{% extends 'base.html' %}
+{% block title %}{{ lang['professional_dashboard'] }} - Hamro Sewa{% endblock %}
+{% block content %}
 <div class="container" style="text-align:center;">
     <h1>Welcome, Professional!</h1>
     <p class="subtitle">View customer requests and messages for your job: <span style="color:#d4a373;font-weight:600;">{{ job }}</span></p>
@@ -52,4 +54,5 @@
         </div>
     </div>
 </div>
+{% endblock %}
 

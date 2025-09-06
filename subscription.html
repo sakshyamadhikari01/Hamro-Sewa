@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Subscription Panel{% endblock %}
+{% block content %}
+<div class="container" style="max-width:480px;margin:40px auto;text-align:center;">
+    <h1>Subscription Panel</h1>
+    {% if message %}
+        <div style="color:#d32f2f;font-weight:600;margin-bottom:18px;">{{ message }}</div>
+    {% endif %}
+    <div style="margin-bottom:24px;">
+        <strong>Status:</strong>
+        {% if subscription.active %}
+            <span style="color:#4caf50;font-weight:600;">Activated</span>
+            <br>
+            <span>Expires: {{ subscription.expires | datetimeformat }}</span>
+        {% else %}
+            <span style="color:#d32f2f;font-weight:600;">Not Activated</span>
+        {% endif %}
+    </div>
+    <form method="POST" style="margin-bottom:18px;">
+        <div style="margin-bottom:12px;">
+            <button type="submit" name="plan" value="week" class="auth-btn" style="margin-right:12px;">Rs 50 / Week</button>
+            <button type="submit" name="plan" value="month" class="auth-btn">Rs 300 / Month</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

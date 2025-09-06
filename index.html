@@ -1,36 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Hamro Sewa - Home{% endblock %}
+{% block content %}
 <div class="container" style="background: linear-gradient(90deg, #f5e9da 0%, #d4a373 100%), url('/static/silk-texture.png'); background-blend-mode:soft-light; background-size:cover; color: #3d2c1a; border-radius: 18px; box-shadow: 0 8px 32px 0 rgba(212,163,115,0.07); padding: 18px 32px;">
-<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:18px;">
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:18px;">
         <img src="/static/logo.png" alt="Hamro Sewa Logo" style="width:120px;height:120px;object-fit:contain;margin-bottom:10px;" />
-<h1 style="margin-bottom:0;">Hamro Sewa</h1>
+    <h1 style="margin-bottom:0;">Hamro Sewa</h1>
     </div>
- <p class="subtitle">{{ lang['quality_home_services'] }}</p>
+    <p class="subtitle">{{ lang['quality_home_services'] }}</p>
     <form class="city-select-form">
     <label for="city">{{ lang['service_available_in'] }}</label>
         <select id="city" name="city" disabled>
-            <option value="bharatpur">Bharatpur</option>
+            <option value="Chitwan">Chitwan</option>
         </select>
     </form>
-     <div class="options">
+    <div class="options">
         <a href="/service/electrician" class="option-card">
             <span class="option-icon" style="display:flex;align-items:center;justify-content:center;height:32px;">
                 <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="10" y="4" width="8" height="12" rx="2" fill="#d4a373"/><rect x="12" y="16" width="4" height="8" rx="1" fill="#a98467"/></svg>
-</span>
-<span>electrician</span>
-<span class="option-desc">leaks,fittings,and more</span>
-  </a>
+            </span>
+            <span>Electrician</span>
+            <span class="option-desc">Repairs, installations, and more</span>
+        </a>
+        <a href="/service/plumber" class="option-card">
+            <span class="option-icon" style="display:flex;align-items:center;justify-content:center;height:32px;">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="6" y="12" width="16" height="4" rx="2" fill="#d4a373"/><rect x="12" y="16" width="4" height="8" rx="2" fill="#a98467"/></svg>
+            </span>
+            <span>Plumber</span>
+            <span class="option-desc">Leaks, fittings, and more</span>
+        </a>
         <a href="/service/carpenter" class="option-card">
             <span class="option-icon" style="display:flex;align-items:center;justify-content:center;height:32px;">
                 <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="8" y="6" width="12" height="4" rx="2" fill="#d4a373"/><rect x="12" y="10" width="4" height="12" rx="2" fill="#a98467"/></svg>
-</span>
+            </span>
             <span>Carpenter</span>
             <span class="option-desc">Furniture, repairs, and more</span>
         </a>
     </div>
- <section class="about-section" style="margin-top:48px;">
+
+    <section class="about-section" style="margin-top:48px;">
     <h2>{{ lang['about'] }}</h2>
         <p>Hamro Sewa is your trusted platform for booking professional home services in Chitwan. We connect you with verified electricians, plumbers, and carpenters for fast, reliable, and quality work. Our mission is to make home maintenance easy, transparent, and stress-free.</p>
     </section>
-  <section class="how-section" style="margin-top:48px;">
+
+    <section class="how-section" style="margin-top:48px;">
     <h2>{{ lang['how_it_works'] }}</h2>
         <ol style="padding-left:24px;">
             <li>Choose your required service (Electrician, Plumber, Carpenter).</li>
@@ -39,25 +51,25 @@
             <li>Chat with your professional for any queries before the visit.</li>
             <li>Enjoy hassle-free service at your doorstep!</li>
         </ol>
-</section>
+    </section>
 
     <section class="featured-section" style="margin-top:48px;">
     <h2>{{ lang['featured_professionals'] }}</h2>
-    <div class="featured-list" style="display:flex;gap:32px;flex-wrap:wrap;justify-content:center;">
+        <div class="featured-list" style="display:flex;gap:32px;flex-wrap:wrap;justify-content:center;">
             <div class="featured-card" style="background:#fff7e6;border-radius:14px;box-shadow:0 4px 16px rgba(212,163,115,0.07);padding:24px 32px;min-width:220px;text-align:center;">
                 <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ram Shrestha" style="width:80px;height:80px;border-radius:50%;margin-bottom:12px;">
- <h3 style="color:#d4a373;">Ram Shrestha</h3>
+                <h3 style="color:#d4a373;">Ram Shrestha</h3>
                 <p style="color:#a98467;">Electrician • 5 years experience</p>
             </div>
             <div class="featured-card" style="background:#fff7e6;border-radius:14px;box-shadow:0 4px 16px rgba(212,163,115,0.07);padding:24px 32px;min-width:220px;text-align:center;">
                 <img src="https://randomuser.me/api/portraits/women/36.jpg" alt="Manju Karki" style="width:80px;height:80px;border-radius:50%;margin-bottom:12px;">
- <h3 style="color:#d4a373;">Manju Karki</h3>
+                <h3 style="color:#d4a373;">Manju Karki</h3>
                 <p style="color:#a98467;">Plumber • 6 years experience</p>
             </div>
             <div class="featured-card" style="background:#fff7e6;border-radius:14px;box-shadow:0 4px 16px rgba(212,163,115,0.07);padding:24px 32px;min-width:220px;text-align:center;">
                 <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="Krishna Tamang" style="width:80px;height:80px;border-radius:50%;margin-bottom:12px;">
                 <h3 style="color:#d4a373;">Krishna Tamang</h3>
-                <p style="color:#a98467;">Carpenter • 10 years experience</p>
+                <p style="color:#a98467;">Carpenter • 8 years experience</p>
             </div>
         </div>
     </section>
@@ -69,17 +81,17 @@
                 <span class="why-icon"></span>
                 <h3>{{ lang['experts_only'] }}</h3>
                 <p>Our professionals are well trained and have on-job expertise.</p>
- </div>
+            </div>
             <div class="why-card">
                 <span class="why-icon"></span>
                 <h3>{{ lang['transparent_pricing'] }}</h3>
                 <p>See fixed prices before you book. No hidden charges.</p>
- </div>
+            </div>
             <div class="why-card">
                 <span class="why-icon"></span>
                 <h3>{{ lang['fully_equipped'] }}</h3>
                 <p>We bring everything needed to get the job done well.</p>
-                 </div>
+            </div>
             <div class="why-card">
                 <span class="why-icon"></span>
                 <h3>{{ lang['quality_assured'] }}</h3>
@@ -87,7 +99,8 @@
             </div>
         </div>
     </section>
-<section class="testimonials-section" style="margin-top:48px;">
+
+    <section class="testimonials-section" style="margin-top:48px;">
     <h2>{{ lang['what_customers_say'] }}</h2>
         <div class="testimonials-list" style="display:flex;gap:32px;flex-wrap:wrap;justify-content:center;">
             <div class="testimonial-card" style="background:#fff7e6;border-radius:14px;box-shadow:0 4px 16px rgba(212,163,115,0.07);padding:24px 32px;min-width:220px;max-width:340px;">
@@ -106,10 +119,5 @@
     </section>
 </div>
 </div>
-
-
-
-
-
-
+{% endblock %}
 

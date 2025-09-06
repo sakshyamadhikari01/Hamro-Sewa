@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}{{ lang['register_title'] }} - Hamro Sewa{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>{{ lang['register_title'] }}</h1>
+    <form method="POST" action="/register" class="auth-form">
+    <label for="role">{{ lang['register'] }}:</label>
+        <select id="role" name="role" required>
+            <option value="customer">Customer</option>
+            <option value="professional">Professional</option>
+        </select>
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required placeholder="9800000000">
+        <button type="button" id="verify-btn" class="auth-btn" onclick="verifyPhone()">Verify Phone</button>
+        <span id="phone-status" style="color: #d4a373; font-size: 0.95em;"></span>
+
+        <div id="professional-fields" style="display:none;">
+            <label for="job">Choose Your Job</label>
+            <select id="job" name="job">
+                <option value="electrician">Electrician</option>
+                <option value="plumber">Plumber</option>
+                <option value="carpenter">Carpenter</option>
+            </select>
+            <label for="certificate">Upload Certificate</label>
+            <input type="file" id="certificate" name="certificate" accept=".pdf,.jpg,.jpeg,.png">
+        </div>
+
+    <button type="submit" class="auth-btn">{{ lang['register'] }}</button>
+    <p class="auth-link">{{ lang['login'] }}? <a href="/login">{{ lang['login'] }}</a></p>
+    </form>
+    <script>
+    // Show professional fields if role is professional
+    document.getElementById('role').addEventListener('change', function() {
+        var profFields = document.getElementById('professional-fields');
+        if (this.value === 'professional') {
+            profFields.style.display = 'block';
+        } else {
+            profFields.style.display = 'none';
+        }
+    });
+
+    // Simulated phone verification
+    function verifyPhone() {
+        var phone = document.getElementById('phone').value;
+        var status = document.getElementById('phone-status');
+        if (/^98[0-9]{8}$/.test(phone)) {
+            status.textContent = 'Phone number verified!';
+            status.style.color = '#4caf50';
+        } else {
+            status.textContent = 'Invalid phone number.';
+            status.style.color = '#d32f2f';
+        }
+    }
+    </script>
+</div>
+{% endblock %}
