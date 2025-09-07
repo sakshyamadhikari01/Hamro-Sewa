@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/styles.css">
     <link rel="stylesheet" href="/static/animated-footer.css">
 </head>
 <body>
@@ -18,7 +18,7 @@
                 <a href="/home" class="nav-link">Home</a>
                 <a href="/contacts" class="nav-link">{{ lang['contacts'] }}</a>
                 <a href="/team" class="nav-link">{{ lang['team'] }}</a>
-                {% if session.get('role') == 'professional' and session.get('phone') and session.get('job') and request.endpoint == 'professional_dashboard' %}
+                {% if session.get('role') == 'professional' and session.get('phone') and session.get('job') %}
                     <a href="/professional_dashboard/{{ session.get('job') }}" class="nav-link">Dashboard</a>
                 {% endif %}
                 <a href="/login" class="nav-link">{{ lang['login'] }}</a>

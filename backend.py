@@ -1,12 +1,11 @@
+users_db = {}
 from flask import Flask, render_template, request, session, redirect, url_for
 import random
 from datetime import datetime
-import time  # For subscription expiry checks
-
+import time  
 app = Flask(__name__)
 app.secret_key = 'hamrosewa_secret_key'
 
-# Language dictionary
 LANG = {
     'en': {
         'home': 'Home',
@@ -39,7 +38,6 @@ LANG = {
     }
 }
 
-# Sample data for professionals
 professionals = {
     'electrician': [
         {'name': 'Ram Shrestha', 'contact': '9800000001', 'rating': 4.5, 'experience': '5 years', 'image': 'https://randomuser.me/api/portraits/men/32.jpg'},
@@ -58,20 +56,16 @@ professionals = {
     ]
 }
 
-# Simulated bookings and chat history databases
+
 buys_slots_db = {}
 chat_history_db = {}
 
-# Subscription storage (simulate DB)
 subscriptions = {}
 
-# ------------------------
-# Routes
-# ------------------------
 
 @app.route('/')
 def index():
-    lang_code = session.get('lang', 'en;)
+    lang_code = session.get('lang', 'en')
     lang = LANG.get(lang_code, LANG['en'])
     print(f"[DEBUG] Rendering index page with language: {lang_code}")
     return render_template('index.html', lang=lang)
@@ -136,6 +130,14 @@ def chat(job, name):
 
     chat_history = chat_history_db.get((name, job), [])
 
+@app.route('/profile/<job>/<name>')
+def profile(job, name):
+    prof = next((p for p in professionals.get(job.lower(), []) if p['name'] == name), None)
+    if not prof:
+        return "Professional not found", 404
+    lang_code = session.get('lang', 'en')
+    lang = LANG.get(lang_code, LANG['en'])
+    return render_template('profile.html', prof=prof, job=job, lang=lang)
     if request.method == 'POST':
         msg_text = request.form.get('message')
         if msg_text:
@@ -169,12 +171,12 @@ def login():
             message = 'Phone and password required!'
             print("[WARN] Missing phone or password")
         else:
-            # Simulate login success
+        
             session['role'] = role
             session['phone'] = phone
             session['job'] = job
 
-            # Check subscription for professional
+       
             if role == 'professional':
                 sub = subscriptions.get(phone, {'active': False, 'expires': None})
                 session['subscription'] = sub
@@ -200,7 +202,7 @@ def professional_dashboard(job):
     sub = session.get('subscription', {'active': False, 'expires': None})
     message = ''
 
-    # Demo requests and messages
+
     all_requests = [
         {'customer': 'Suman P.', 'service': 'Electrician', 'date': '2025-09-05', 'time': '10:00', 'message': 'Need urgent help with wiring!'},
         {'customer': 'Rina K.', 'service': 'Plumber', 'date': '2025-09-06', 'time': '14:00', 'message': 'Can you fix my kitchen tap?'},
@@ -212,7 +214,7 @@ def professional_dashboard(job):
         {'customer': 'Prakash T.', 'service': 'Electrician', 'text': 'Can you come today for the lights?'}
     ]
 
-    # Filter requests and messages for the job
+
     requests = [r for r in all_requests if r['service'].lower() == job.lower()]
     messages = [m for m in all_messages if m['service'].lower() == job.lower()]
 
@@ -246,14 +248,13 @@ def professional_dashboard(job):
             message = 'Invalid selection.'
             print("[WARN] Invalid subscription selection")
 
-    # Check subscription expiry
     if sub['active'] and sub['expires']:
         if sub['expires'] < int(time.time()):
             sub = {'active': False, 'expires': None}
             phone = session.get('phone')
             subscriptions[phone] = sub
             session['subscription'] = sub
-            message = 'Subscription expired.'
+            message = 'Subscription expired.' 
             print(f"[INFO] Subscription expired for {phone}")
 
     return render_template('subscription.html', lang=lang, subscription=sub, message=message, requests=requests, messages=messages)
@@ -274,7 +275,7 @@ def register():
 
         print(f"[DEBUG] Registration attempt: role={role}, name={name}, phone={phone}, job={job}")
 
-        # Simulate phone verification (basic check)
+       
         phone_verified = phone and phone.startswith('98') and len(phone) == 10
 
         cert_filename = None
@@ -283,7 +284,7 @@ def register():
             cert_file.save(cert_filename)
             print(f"[INFO] Certificate uploaded: {cert_filename}")
 
-        # Here you would save user to database
+    
         message = f"Registered as {role}. "
         if role == 'professional':
             message += f"Job: {job}. Certificate: {'Uploaded' if cert_filename else 'Not uploaded'}. "
@@ -308,9 +309,9 @@ def contacts():
         return render_template('contacts.html', message="Thank you for contacting us! We'll get back to you soon.", lang=lang)
     return render_template('contacts.html', lang=lang)
 
-# ------------------------
-# Run the app
-# ------------------------
+
+
+
 
 if __name__ == '__main__':
     print("[INFO] Starting Flask app in debug mode")

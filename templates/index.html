@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% block title %}Hamro Sewa - Home{% endblock %}
 {% block content %}
-<div class="container" style="background: linear-gradient(90deg, #f5e9da 0%, #d4a373 100%), url('/static/silk-texture.png'); background-blend-mode:soft-light; background-size:cover; color: #3d2c1a; border-radius: 18px; box-shadow: 0 8px 32px 0 rgba(212,163,115,0.07); padding: 18px 32px;">
-    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:18px;">
-        <img src="/static/logo.png" alt="Hamro Sewa Logo" style="width:120px;height:120px;object-fit:contain;margin-bottom:10px;" />
-    <h1 style="margin-bottom:0;">Hamro Sewa</h1>
+<div class="container hero-section glass-hero vibrant-hero-bg" style="position:relative;overflow:hidden;background: linear-gradient(120deg, #d7cdcc 0%, #ebe6e6 60%, #ffffff 100%); color: #3d2c1a; border-radius: 22px; box-shadow: 0 12px 40px 0 rgba(215,205,204,0.13); padding: 32px 32px 28px 32px;">
+    <div class="hero-gradient-overlay"></div>
+    <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:18px;">
+        <img src="/static/logo.png" alt="Hamro Sewa Logo" class="hero-logo-pop" style="width:140px;height:140px;object-fit:contain;margin-bottom:14px;border-radius:50%;background:#fff7e6cc;backdrop-filter:blur(2px);padding:8px;border:4px solid #fffbe9;box-shadow:0 8px 32px #ff7e5f55,0 2px 8px #d4a37388;animation: heroLogoPulse 2.5s infinite alternate;" />
+    <h1 class="hero-title-animate" style="margin-bottom:0;color:#3d2c1a;text-shadow:0 4px 24px #d7cdcc,0 1px 0 #ebe6e6;letter-spacing:2px;font-size:3.1em;">Hamro Sewa</h1>
     </div>
-    <p class="subtitle">{{ lang['quality_home_services'] }}</p>
-    <form class="city-select-form">
+    <p class="subtitle hero-subtitle-animate">{{ lang['quality_home_services'] }}</p>
+    <form class="city-select-form" style="position:relative;z-index:1;">
     <label for="city">{{ lang['service_available_in'] }}</label>
         <select id="city" name="city" disabled>
             <option value="Chitwan">Chitwan</option>
@@ -58,18 +59,18 @@
         <div class="featured-list" style="display:flex;gap:32px;flex-wrap:wrap;justify-content:center;">
             <div class="featured-card" style="background:#fff7e6;border-radius:14px;box-shadow:0 4px 16px rgba(212,163,115,0.07);padding:24px 32px;min-width:220px;text-align:center;">
                 <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ram Shrestha" style="width:80px;height:80px;border-radius:50%;margin-bottom:12px;">
-                <h3 style="color:#d4a373;">Ram Shrestha</h3>
-                <p style="color:#a98467;">Electrician • 5 years experience</p>
+                <h3 style=";">Ram Shrestha</h3>
+                <p style=";">Electrician • 5 years experience</p>
             </div>
             <div class="featured-card" style="background:#fff7e6;border-radius:14px;box-shadow:0 4px 16px rgba(212,163,115,0.07);padding:24px 32px;min-width:220px;text-align:center;">
                 <img src="https://randomuser.me/api/portraits/women/36.jpg" alt="Manju Karki" style="width:80px;height:80px;border-radius:50%;margin-bottom:12px;">
-                <h3 style="color:#d4a373;">Manju Karki</h3>
-                <p style="color:#a98467;">Plumber • 6 years experience</p>
+                <h3 style="">Manju Karki</h3>
+                <p style=";">Plumber • 6 years experience</p>
             </div>
             <div class="featured-card" style="background:#fff7e6;border-radius:14px;box-shadow:0 4px 16px rgba(212,163,115,0.07);padding:24px 32px;min-width:220px;text-align:center;">
                 <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="Krishna Tamang" style="width:80px;height:80px;border-radius:50%;margin-bottom:12px;">
-                <h3 style="color:#d4a373;">Krishna Tamang</h3>
-                <p style="color:#a98467;">Carpenter • 8 years experience</p>
+                <h3 style=";">Krishna Tamang</h3>
+                <p style=";">Carpenter • 8 years experience</p>
             </div>
         </div>
     </section>
@@ -104,16 +105,16 @@
     <h2>{{ lang['what_customers_say'] }}</h2>
         <div class="testimonials-list" style="display:flex;gap:32px;flex-wrap:wrap;justify-content:center;">
             <div class="testimonial-card" style="background:#fff7e6;border-radius:14px;box-shadow:0 4px 16px rgba(212,163,115,0.07);padding:24px 32px;min-width:220px;max-width:340px;">
-                <p style="font-style:italic;color:#a98467;">“Hamro Sewa made it so easy to get my electrical work done. Fast and professional!”</p>
-                <div style="margin-top:12px;font-weight:600;color:#d4a373;">- Suman P.</div>
+                <p style="font-style:italic;;">“Hamro Sewa made it so easy to get my electrical work done. Fast and professional!”</p>
+                <div style="margin-top:12px;font-weight:600;;">- Suman P.</div>
             </div>
             <div class="testimonial-card" style="background:#fff7e6;border-radius:14px;box-shadow:0 4px 16px rgba(212,163,115,0.07);padding:24px 32px;min-width:220px;max-width:340px;">
-                <p style="font-style:italic;color:#a98467;">“Booking a plumber was quick and transparent. Highly recommend!”</p>
-                <div style="margin-top:12px;font-weight:600;color:#d4a373;">- Rina K.</div>
+                <p style="font-style:italic;;">“Booking a plumber was quick and transparent. Highly recommend!”</p>
+                <div style="margin-top:12px;font-weight:600;;">- Rina K.</div>
             </div>
             <div class="testimonial-card" style="background:#fff7e6;border-radius:14px;box-shadow:0 4px 16px rgba(212,163,115,0.07);padding:24px 32px;min-width:220px;max-width:340px;">
-                <p style="font-style:italic;color:#a98467;">“The carpenter was friendly and skilled. Will use Hamro Sewa again!”</p>
-                <div style="margin-top:12px;font-weight:600;color:#d4a373;">- Prakash T.</div>
+                <p style="font-style:italic;;">“The carpenter was friendly and skilled. Will use Hamro Sewa again!”</p>
+                <div style="margin-top:12px;font-weight:600;;">- Prakash T.</div>
             </div>
         </div>
     </section>

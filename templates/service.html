@@ -11,14 +11,14 @@
         </div>
     </form>
     <div class="professional-list">
-        {% for prof in professionals %}
+        {% for prof in job_list %}
         <div class="professional-card">
             <div class="profile-img-wrapper">
                 <img src="{{ prof.image }}" alt="{{ prof.name }}" class="profile-img" />
                 <span class="job-badge">{{ job }}</span>
             </div>
             <div class="details">
-                <h2>{{ prof.name }}</h2>
+                <h2><a href="/profile/{{ job }}/{{ prof.name }}" style="color:inherit;text-decoration:underline;">{{ prof.name }}</a></h2>
                 <p class="employee-location" style="margin-bottom:8px;">
                     {% set chowk = '' %}
                     {% if job == 'Electrician' %}

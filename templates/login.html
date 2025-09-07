@@ -11,6 +11,13 @@
         </select>
         <label for="phone">Phone Number</label>
         <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required placeholder="9800000000">
+        <button type="button" id="send-otp-btn" class="auth-btn" onclick="sendOTP()">Send OTP</button>
+        <div id="otp-section" style="display:none;">
+            <label for="otp">Enter OTP</label>
+            <input type="text" id="otp" name="otp" pattern="[0-9]{5}" maxlength="5" placeholder="Enter 5-digit OTP">
+            <button type="button" class="auth-btn" onclick="verifyOTP()">Verify OTP</button>
+            <span id="otp-status" style="color: #d4a373; font-size: 0.95em;"></span>
+        </div>
         <label for="password">Password</label>
         <input type="password" id="password" name="password" required>
         <div id="job-select" style="display:none;">
@@ -32,6 +39,13 @@
                 jobSelect.style.display = 'none';
             }
         });
+        function sendOTP() {
+            document.getElementById('otp-section').style.display = 'block';
+            document.getElementById('otp-status').textContent = 'OTP sent to your phone.';
+        }
+        function verifyOTP() {
+            document.getElementById('otp-status').textContent = 'OTP verified (mock).';
+        }
         </script>
     </form>
 </div>

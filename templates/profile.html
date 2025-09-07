@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}{{ prof.name }}'s Profile - Hamro Sewa{% endblock %}
+{% block content %}
+<div class="container" style="max-width: 520px; margin: 40px auto;">
+    <div class="profile-img-wrapper" style="text-align:center;">
+        <img src="{{ prof.image }}" alt="{{ prof.name }}" class="profile-img" style="width:120px;height:120px;border-radius:50%;margin-bottom:18px;">
+        <span class="job-badge" style="display:block;margin-top:8px;">{{ job|capitalize }}</span>
+    </div>
+    <h1 style="text-align:center;;">{{ prof.name }}</h1>
+    <p style="text-align:center;font-size:1.1em;;">{{ prof.experience }}</p>
+    <div style="margin:24px 0;">
+        <p><strong>Contact:</strong> {{ prof.contact }}</p>
+        <p><strong>Rating:</strong> {{ prof.rating }} / 5</p>
+    </div>
+    <a href="/book/{{ job }}/{{ prof.name }}" class="book-btn" style="width:100%;text-align:center;">Book Now</a>
+</div>
+{% endblock %}
