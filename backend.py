@@ -305,7 +305,7 @@ def contacts():
         subject = request.form.get('subject')
         message = request.form.get('message')
         print(f"[DEBUG] Contact form submitted by {name} with subject '{subject}'")
-        # Here you would handle sending the message (e.g., email or save to DB)
+      
         return render_template('contacts.html', message="Thank you for contacting us! We'll get back to you soon.", lang=lang)
     return render_template('contacts.html', lang=lang)
 
